@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.15'
+gem 'rails', '4.0.3'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -11,8 +11,8 @@ gem 'kaminari'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass-rails'
+  gem 'coffee-rails'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -40,6 +40,10 @@ group :development do
   gem 'binding_of_caller'
 end
 
+gem 'protected_attributes'
+gem 'rails-observers'
+gem 'actionpack-page_caching'
+gem 'actionpack-action_caching'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

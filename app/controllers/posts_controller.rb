@@ -5,7 +5,14 @@ class PostsController < ApplicationController
     @posts = Post.search(params[:search]).page(params[:page]).per(15)
     logger.info("Params search is #{params[:search]}")
     respond_to do |format|
-      format.html # index.html.erb
+      format.html do
+        if %w[ published unpublished ].include? params[:status]
+          @status = params[:status]
+        else
+          flash.now[:error] = "There was a problem with your request"
+          @status = nil
+        end
+      end
       format.json { render json: @posts }
     end
   end

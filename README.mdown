@@ -1,13 +1,6 @@
-# My New Blog!
+# Slightly more secure Blog!
 
-I've got a lot to say, and now I have a place to say it!!!!!
-
-Read all my amazing posts!!!!! You can load them into the app with: `rake load_blog:load_shit`
-
-Since I know you want to read them all, I designed my page to show EVERYTHING on the front page of the site!!!!!
-
-I know it is a little slow (but totes worth it!!!!)... _Do you know how I can make it faster?_
-
+Removed the following security vulnerablities, by whitelisting parameters in the controller and by sanitizing user input in the model.
 XSS:
 ```
 http://localhost:3000/posts?utf8=%E2%9C%93&search=archive&status=foo=%22bar%22%3E%3Cscript%3Ealert%28%22p0wned!!!%22%29%3C/script%3E%3Cp%20data-foo
@@ -18,3 +11,25 @@ SQL Injection:
 ```
 foo%'); INSERT INTO posts (id,title,body,created_at,updated_at) VALUES (99,'hacked','hacked alright','2013-07-18','2013-07-18'); SELECT "posts".* FROM "posts" WHERE (title like '%anything
 ```
+
++BRAKEMAN REPORT+
+
+Application path: /Users/gringocl/Dropbox/Projects/CodeFellows/ivan_the_terribles_blog-insecure
+Rails version: 4.0.3
+Brakeman version: 2.4.1
+Started at 2014-03-13 22:57:36 -0700
+Duration: 0.596957 seconds
+Checks run: BasicAuth, ContentTag, CrossSiteScripting, DefaultRoutes, Deserialize, DetailedExceptions, DigestDoS, EscapeFunction, Evaluation, Execute, FileAccess, FilterSkipping, ForgerySetting, HeaderDoS, I18nXSS, JRubyXML, JSONParsing, LinkTo, LinkToHref, MailTo, MassAssignment, ModelAttrAccessible, ModelAttributes, ModelSerialize, NestedAttributes, NumberToCurrency, QuoteTableName, Redirect, Render, RenderDoS, ResponseSplitting, SQL, SSLVerify, SafeBufferManipulation, SanitizeMethods, SelectTag, SelectVulnerability, Send, SendFile, SessionSettings, SimpleFormat, SingleQuotes, SkipBeforeFilter, StripTags, SymbolDoS, TranslateBug, UnsafeReflection, ValidationRegex, WithoutProtection, YAMLParsing
+
+
++SUMMARY+
+
++-------------------+-------+
+| Scanned/Reported  | Total |
++-------------------+-------+
+| Controllers       | 4     |
+| Models            | 3     |
+| Templates         | 21    |
+| Errors            | 0     |
+| Security Warnings | 0 (0) |
++-------------------+-------+
